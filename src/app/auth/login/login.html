@@ -1,0 +1,26 @@
+<form (submit)="onSubmit($event)">
+    <h2>Login</h2>
+    <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" [formField]="loginForm.email">
+        @if (loginForm.email().touched() && loginForm.email().invalid()) {
+           <ul class="error-list" >
+            @for (error of loginForm.email().errors(); track error) {
+                <li>{{ error.message}}</li>
+            }
+           </ul>
+        }
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" [formField]="loginForm.password">
+        @if (loginForm.password().touched() && loginForm.password().invalid()) {
+           <ul class="error-list" >
+            @for (error of loginForm.password().errors(); track error.kind) {
+                <li>{{ error.message}}</li>
+            }
+           </ul>
+        }
+    </div>
+    <button type="submit" [disabled]="loginForm().invalid()">Submit</button>
+</form>
