@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class Auth {
   private loggedIn=false;
-  private readonly validEmail='Admin@gmail.com';
+  private readonly validEmail='admin@gmail.com';
   private readonly validPassword='Admin29@';
   login(email:string,password:string):boolean{
     if(email === this.validEmail && password === this.validPassword){
@@ -18,5 +18,4 @@ export class Auth {
   isLoggedIn():boolean{
     return this.loggedIn;
   }
-
 }
