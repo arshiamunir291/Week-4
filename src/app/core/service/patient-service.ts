@@ -8,7 +8,7 @@ export class PatientService {
   addPatient(patient:any){
     this.patients.push(patient);
   }
-  exist(patient:any){
-    return this.patients.some(p=>p.email=== patient.email || p.cnic===patient.cnic);
+  exist(cnic:string):boolean{
+    return this.patients.some(p=>p.cnic===cnic);
   }
 }
