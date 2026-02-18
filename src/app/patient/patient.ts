@@ -17,7 +17,7 @@ export class Patient {
     fullname: new FormControl('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl('', [Validators.required, Validators.email, this.duplicatePatientValidator('email')]),
     cnic: new FormControl('', [Validators.required, Validators.maxLength(13), Validators.minLength(13), this.duplicatePatientValidator('cnic')]),
-    age: new FormControl('', [Validators.required,]),
+    age: new FormControl('', [Validators.required, this.ageValidator()]),
     gender: new FormControl('', [Validators.required,]),
     phone: new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
     disease: new FormControl('', [Validators.required]),
@@ -51,6 +51,7 @@ export class Patient {
     const control = this.patientForm.get('age');
     if (!control || !control.touched || !control.errors) return null;
     if (control.errors['required']) return 'Age is required';
+    if (control.errors['invalidAge']) return 'Enter valid age (0-90)';
     return null;
   }
   get genderError(): string | null {
@@ -102,6 +103,16 @@ export class Patient {
       }
       return null;
     }
+  }
+  private ageValidator(): ValidatorFn {
+    return (control: AbstractControl) => {
+      if (!control.value) return null;
+      const ageValue = Number(control.value);
+      if (isNaN(ageValue) || ageValue < 0 || ageValue > 90) {
+        return { invalidAge: true };
+      }
+      return null;
+    };
   }
 }
 
