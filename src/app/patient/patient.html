@@ -1,56 +1,63 @@
-<form [formGroup]="patientForm" (ngSubmit)="onsubmit()">
-    <h1>Register Patient</h1>
-    <div>
-        <label for="fullname">Full Name</label>
-        <input type="text" id="fullname" formControlName="fullname" placeholder="Enter full name">
-        @if(fullNameError;as error){
-        <small class="error-text">{{error}}</small>
-        }
+<div class="container-fluid d-flex flex-column mt-2 align-items-center">
+    <h1 class="fs-2 mb-3 fw-bold text-white">Smart Care Portal</h1>
+    <div class="card shadow-sm pt-2 pb-2">
+        <div class="card-body">
+            <h2 class="card-title text-center mb-1 ">Register patient</h2>
+            <form [formGroup]="patientForm" (ngSubmit)="onsubmit()">
+                <div class="mb-1">
+                    <label for="fullname" class="form-label fw-bold">Full Name</label>
+                    @if(fullNameError;as error){
+                        <small class="text-danger px-4">{{error}}</small>
+                    }
+                    <input type="text" id="fullname" class="form-control" formControlName="fullname"placeholder="Enter full name">
+                </div>
+                <div class="mb-1">
+                    <label for="email" class="form-label fw-bold">Email</label>
+                    @if(emailError; as error ){
+                        <small class="text-danger px-4">{{ error}}</small>
+                    }
+                    <input type="email" id="email" class="form-control" formControlName="email"placeholder="Enter email">
+                </div>
+                <div class="mb-1">
+                    <label for="cnic" class="form-label fw-bold">CNIC</label>
+                     @if(cnicError; as error ){
+                        <small class="text-danger px-4">{{ error}}</small>
+                    }
+                    <input type="text" id="cnic" class="form-control" formControlName="cnic" placeholder="Enter cnic">
+                </div>
+                <div class="mb-1">
+                    <label for="age" class="form-label fw-bold">Age</label>
+                    @if(ageError; as error ){
+                        <small class="text-danger px-4">{{ error}}</small>
+                    }
+                    <input type="number" id="age" class="form-control" formControlName="age" placeholder="Enter age">   
+                </div>
+                <div class="mb-1">
+                    <label for="gender" class="form-label fw-bold">Gender</label>
+                    @if(genderError; as error ){
+                        <small class="text-danger px-4">{{ error}}</small>
+                    }                    
+                    <input type="text" id="gender" class="form-control" formControlName="gender"placeholder="Enter gender">
+                </div>
+                <div class="mb-1">
+                    <label for="phone" class="form-label fw-bold">Phone</label>
+                    @if(phoneError; as error ){
+                        <small class="text-danger px-4">{{ error}}</small>
+                    }                    
+                    <input type="text" id="phone" class="form-control" formControlName="phone"placeholder="Enter phone number">
+                </div>
+                <div class="mb-1">
+                    <label for="disease" class="form-label fw-bold">Disease</label>
+                        @if(diseaseError; as error ){
+                        <small class="text-danger px-4">{{ error}}</small>
+                        }                    
+                    <input type="text" id="disease" class="form-control" formControlName="disease"placeholder="Enter disease">
+                </div>
+                <div class="mb-1 d-flex justify-content-start">
+                    <button type="submit" class="btn btn-success fw-bold text-white mt-2 px-5" [disabled]="patientForm.invalid">Submit</button>
+                    <button type="reset" class="btn btn-primary fw-bold text-white mx-2 px-5 mt-2" (click)="resetForm()">Reset</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div>
-        <label for="email">Email</label>
-        <input type="email" id="email" formControlName="email" placeholder="Enter email">
-        @if(emailError; as error ){
-        <small>{{ error}}</small>
-        }
-    </div>
-    <div>
-        <label for="cnic">CNIC</label>
-        <input type="text" id="cnic" formControlName="cnic" placeholder="Enter cnic">
-        @if(cnicError; as error ){
-        <small>{{ error}}</small>
-        }
-    </div>
-    <div>
-        <label for="age">Age</label>
-        <input type="number" id="age" formControlName="age" placeholder="Enter age">
-        @if(ageError; as error ){
-        <small>{{ error}}</small>
-        }
-    </div>
-    <div>
-        <label for="gender">Gender</label>
-        <input type="text" id="gender" formControlName="gender" placeholder="Enter gender">
-        @if(genderError; as error ){
-        <small>{{ error}}</small>
-        }
-    </div>
-    <div>
-        <label for="phone">Phone</label>
-        <input type="text" id="phone" formControlName="phone" placeholder="Enter phone number">
-        @if(phoneError; as error ){
-        <small>{{ error}}</small>
-        }
-    </div>
-    <div>
-        <label for="disease">Disease</label>
-        <input type="text" id="disease" formControlName="disease" placeholder="Enter disease">
-        @if(diseaseError; as error ){
-        <small>{{ error}}</small>
-        }
-    </div>
-    <div>
-        <button type="submit" [disabled]="patientForm.invalid">Submit</button>
-        <button type="reset" (click)="resetForm()">Reset</button>
-    </div>
-</form>
+</div>

@@ -1,8 +1,7 @@
-<div>
-    <h1>Welcome to dashboard</h1>
-   <a routerLink="/login">
-    <button>Logout</button>
-   </a> 
-   <a routerLink="/patient"><button>Register patient </button></a>
-    
+<div class="container d-flex flex-column justify-content-center align-items-center vh-100 text-center text-white">
+    <h1 class="mb-5 fw-bold">Welcome to dashboard</h1>
+    <div class="d-flex gap-4">
+        <a routerLink="/patient" class="btn btn-success btn-lg px-4">Register patient</a>
+        <a routerLink="/login" class="btn btn-danger btn-lg px-4">Logout</a>
+    </div>
 </div>
