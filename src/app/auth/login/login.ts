@@ -1,4 +1,4 @@
-import { Component, inject} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Auth } from '../../core/service/auth';
@@ -12,11 +12,12 @@ import { Auth } from '../../core/service/auth';
 export class Login {
   private authService = inject(Auth);
   private router = inject(Router)
+  loginError:string|null=null;
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
   })
-   onSubmit() {
+  onSubmit() {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
@@ -24,25 +25,27 @@ export class Login {
     const { email, password } = this.loginForm.value;
     const success = this.authService.login(email!, password!);
     if (!success) {
-      this.loginForm.get('email')?.setErrors({loginError:true});
-      this.loginForm.get('password')?.setErrors({loginError:true});
+      this.loginError="Incorrect email or password";
+      this.loginForm.markAsPristine();
       return;
     }
+    this.loginError=null;
     this.router.navigate(['/dashboard']);
   }
-  get emailError(){
-    const control=this.loginForm.get('email');
-    if(!control || !control.touched || !control.errors) return null;
-    if(control.errors['required']) return 'Email is required';
-    if(control.errors['email']) return 'Enter a valid email address';
+  get emailError() {
+    const control = this.loginForm.get('email');
+    if (!control || !control.touched) return null;
+    if (control.errors?.['required']) return 'Email is required';
+    if (control.errors?.['email']) return 'Enter a valid email address';
     return null;
   }
-  get passwordError(){
-   const control =this.loginForm.get('password');
-    if(!control||!control.touched||!control.errors) return null;
-    if(control.errors['required']) return 'Password is required';
-    if(control.errors['minlength']) return 'Minimum 8 characters are required';
-    if(control.errors['loginError']) return 'Incorrect email or password';
+  get passwordError() {
+    const control = this.loginForm.get('password');
+    if (!control || !control.touched) return null;
+    if (control.errors?.['required']) return 'Password is required';
+    if (control.errors?.['minlength']) return 'Minimum 8 characters are required';
+
+    if(this.loginError&& !this.loginForm.dirty) return this.loginError;
     return null;
   }
 }

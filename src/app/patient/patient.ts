@@ -1,13 +1,13 @@
 import { Component, inject, } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router,RouterLink } from '@angular/router';
 import { PatientService } from '../core/service/patient-service';
 import { DuplicatePatientValidator } from '../core/Validators/duplicate-patient.validator';
 import { AgeValidator } from '../core/Validators/age-validator.validator';
 
 @Component({
   selector: 'app-patient',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,RouterLink],
   templateUrl: './patient.html',
   styleUrl: './patient.css',
 })
