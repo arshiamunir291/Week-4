@@ -1,9 +1,5 @@
-import { Injectable } from "@angular/core";
-import { ValidatorFn, AbstractControl } from "@angular/forms";
 
-@Injectable({
-    providedIn: 'root'
-})
+import { ValidatorFn, AbstractControl } from "@angular/forms";
 export class AgeValidator {
     validator(): ValidatorFn {
         return (control: AbstractControl) => {

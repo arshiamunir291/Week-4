@@ -16,7 +16,7 @@ export class Patient {
   private router = inject(Router);
   private patientService = inject(PatientService);
   private duplicatePatient = inject(DuplicatePatientValidator);
-  private ageValidator=inject(AgeValidator);
+  private ageValidator=new AgeValidator();;
 
 
   patientForm = new FormGroup({
