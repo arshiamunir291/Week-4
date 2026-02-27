@@ -33,67 +33,73 @@ export class Patient {
     disease: new FormControl('', [Validators.required]),
   });
 
-
+  private getControlErrors(controlName:string){
+    const control=this.patientForm.get(controlName);
+    if(!control||!(control.touched || control.dirty) || !control.errors){
+      return null;
+    }
+    return control.errors;
+  }
   get fullNameError(): string | null {
-    const control = this.patientForm.get('fullname');
-    if (!control || !control.touched || !control.errors) return null;
-    if (control.errors['required']) return 'Fullname is required';
-    if (control.errors['minlength']) return 'Minimum 3 characters are required';
+    const errors = this.getControlErrors('fullname');    
+    if(!errors)return null;
+    if (errors['required']) return 'Fullname is required';
+    if (errors['minlength']) return 'Minimum 3 characters are required';
     return null;
   }
 
 
   get emailError(): string | null {
-    const control = this.patientForm.get('email');
-    if (!control || !control.errors) return null;
-    if ((control.touched || control.dirty) && control.errors['required']) return 'Email is required';
-    if ((control.touched || control.dirty) && control.errors['email']) return 'Pls enter a valid email';
+    const errors = this.getControlErrors('email');
+    if(!errors) return null;
+    if (errors['required']) return 'Email is required';
+    if (errors['email']) return 'Pls enter a valid email';
     return null;
   }
 
 
   get cnicError(): string | null {
-    const control = this.patientForm.get('cnic');
-    if (!control || !control.errors) return null;
-    if ((control.touched || control.dirty) && control.errors['required']) return 'CNIC is required';
-    if ((control.touched || control.dirty) && control.errors['minlength']) return 'Minimum 13 characters are required';
-    if ((control.touched || control.dirty) && control.errors['maxlength']) return 'Maximum 13 characters are allowed';
-    if (control.errors['duplicatePatient']) return 'Patient with this cnic already exists!';
+    const errors = this.getControlErrors('cnic');
+    if(!errors) return null;
+    if (errors['required']) return 'CNIC is required';
+    if (errors['minlength']) return 'Minimum 13 characters are required';
+    if (errors['maxlength']) return 'Maximum 13 characters are allowed';
+    if (errors['duplicatePatient']) return 'Patient with this cnic already exists!';
     return null;
   }
 
 
   get ageError(): string | null {
-    const control = this.patientForm.get('age');
-    if (!control || !control.touched || !control.errors) return null;
-    if (control.errors['required']) return 'Age is required';
-    if (control.errors['invalidAge']) return 'Enter valid age (0-90)';
+    const errors = this.getControlErrors('age');
+    if(!errors) return null;
+    if (errors['required']) return 'Age is required';
+    if (errors['invalidAge']) return 'Enter valid age (0-90)';
     return null;
   }
 
 
   get genderError(): string | null {
-    const control = this.patientForm.get('gender');
-    if (!control || !control.touched || !control.errors) return null;
-    if (control.errors['required']) return 'Gender is required';
+    const errors = this.getControlErrors('gender');
+    if(!errors) return null;
+    if(errors['required']) return 'Gender is required';
     return null;
   }
 
 
   get phoneError(): string | null {
-    const control = this.patientForm.get('phone');
-    if (!control || !control.touched || !control.errors) return null;
-    if (control.errors['required']) return 'Phone number  is required';
-    if (control.errors['minlength']) return 'Minimum 11 characters are required';
-    if (control.errors['maxlength']) return 'Maximum 11 characters are allowed';
+    const errors = this.getControlErrors('phone');
+    if(!errors) return null;
+    if (errors['required']) return 'Phone number  is required';
+    if (errors['minlength']) return 'Minimum 11 characters are required';
+    if (errors['maxlength']) return 'Maximum 11 characters are allowed';
     return null;
   }
 
 
   get diseaseError(): string | null {
-    const control = this.patientForm.get('disease');
-    if (!control || !control.touched || !control.errors) return null;
-    if (control.errors['required']) return 'Disease is required';
+    const errors = this.getControlErrors('disease');
+    if(!errors) return null;
+    if (errors['required']) return 'Disease is required';
     return null;
   }
 

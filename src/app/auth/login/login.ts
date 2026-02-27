@@ -44,7 +44,6 @@ export class Login {
     if (!control || !control.touched) return null;
     if (control.errors?.['required']) return 'Password is required';
     if (control.errors?.['minlength']) return 'Minimum 8 characters are required';
-
     if(this.loginError&& !this.loginForm.dirty) return this.loginError;
     return null;
   }
