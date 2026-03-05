@@ -1,13 +1,15 @@
 import { Component, inject, } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router,RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { PatientService } from '../core/service/patient-service';
 import { DuplicatePatientValidator } from '../core/Validators/duplicate-patient.validator';
 import { AgeValidator } from '../core/Validators/age-validator.validator';
+import { FormError } from '../shared/form-error/form-error';
+
 
 @Component({
   selector: 'app-patient',
-  imports: [ReactiveFormsModule,RouterLink],
+  imports: [ReactiveFormsModule, RouterLink,FormError],
   templateUrl: './patient.html',
   styleUrl: './patient.css',
 })
@@ -16,7 +18,7 @@ export class Patient {
   private router = inject(Router);
   private patientService = inject(PatientService);
   private duplicatePatient = inject(DuplicatePatientValidator);
-  private ageValidator=new AgeValidator();
+  private ageValidator = new AgeValidator();
 
 
   patientForm = new FormGroup({
@@ -33,77 +35,38 @@ export class Patient {
     disease: new FormControl('', [Validators.required]),
   });
 
-  private getControlErrors(controlName:string){
-    const control=this.patientForm.get(controlName);
-    if(!control||!(control.touched || control.dirty) || !control.errors){
-      return null;
-    }
-    return control.errors;
+  validationMessage = {
+    fullname: {
+      required: 'Fullname is required',
+      minlength: 'Minimum 3 characters are required'
+    },
+    email: {
+      required: 'Email is required',
+      email: 'Enter valid email'
+    },
+    cnic: {
+      required: 'Cnic is required',
+      minlength: 'Minimum 13 characters are required',
+      maxlength: 'Maximum 13 characters are required',
+      duplicatePatient: 'Patient with this cnic already exists'
+    },
+    age: {
+      required: 'Age is required',
+      invalidAge: 'Enter valid age (1-90)'
+    },
+    gender: {
+      required: 'Gender is required',
+    },
+    phone: {
+      required: 'Phone number is required',
+      minlength: 'Minimum 11 characters are required',
+      maxlength: 'Minimum 11 characters are required'
+    },
+    disease: {
+      required: 'Disease is required',
+    },
+
   }
-  get fullNameError(): string | null {
-    const errors = this.getControlErrors('fullname');    
-    if(!errors)return null;
-    if (errors['required']) return 'Fullname is required';
-    if (errors['minlength']) return 'Minimum 3 characters are required';
-    return null;
-  }
-
-
-  get emailError(): string | null {
-    const errors = this.getControlErrors('email');
-    if(!errors) return null;
-    if (errors['required']) return 'Email is required';
-    if (errors['email']) return 'Pls enter a valid email';
-    return null;
-  }
-
-
-  get cnicError(): string | null {
-    const errors = this.getControlErrors('cnic');
-    if(!errors) return null;
-    if (errors['required']) return 'CNIC is required';
-    if (errors['minlength']) return 'Minimum 13 characters are required';
-    if (errors['maxlength']) return 'Maximum 13 characters are allowed';
-    if (errors['duplicatePatient']) return 'Patient with this cnic already exists!';
-    return null;
-  }
-
-
-  get ageError(): string | null {
-    const errors = this.getControlErrors('age');
-    if(!errors) return null;
-    if (errors['required']) return 'Age is required';
-    if (errors['invalidAge']) return 'Enter valid age (0-90)';
-    return null;
-  }
-
-
-  get genderError(): string | null {
-    const errors = this.getControlErrors('gender');
-    if(!errors) return null;
-    if(errors['required']) return 'Gender is required';
-    return null;
-  }
-
-
-  get phoneError(): string | null {
-    const errors = this.getControlErrors('phone');
-    if(!errors) return null;
-    if (errors['required']) return 'Phone number  is required';
-    if (errors['minlength']) return 'Minimum 11 characters are required';
-    if (errors['maxlength']) return 'Maximum 11 characters are allowed';
-    return null;
-  }
-
-
-  get diseaseError(): string | null {
-    const errors = this.getControlErrors('disease');
-    if(!errors) return null;
-    if (errors['required']) return 'Disease is required';
-    return null;
-  }
-
-
   onsubmit() {
     if (this.patientForm.invalid) {
       this.patientForm.markAllAsTouched();
@@ -119,6 +82,6 @@ export class Patient {
   resetForm() {
     this.patientForm.reset();
   }
- 
+
 }
 
