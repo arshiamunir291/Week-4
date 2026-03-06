@@ -9,7 +9,7 @@ export class Auth {
   private readonly STORAGE_KEY = 'isLoggedIn';
   login(email: string, password: string): boolean {
     if (email === this.validEmail && password === this.validPassword) {
-      localStorage.setItem(this.STORAGE_KEY,'true');
+        localStorage.setItem(this.STORAGE_KEY,'true');
       return true;
     }
     return false;
@@ -18,6 +18,6 @@ export class Auth {
     return localStorage.getItem(this.STORAGE_KEY)==='true';
   }
   logout(){
-    localStorage.removeItem(this.STORAGE_KEY);
+      localStorage.removeItem(this.STORAGE_KEY);
   }
 }
