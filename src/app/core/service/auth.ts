@@ -4,18 +4,20 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class Auth {
-  private loggedIn=false;
-  private readonly validEmail='admin@gmail.com';
-  private readonly validPassword='Admin29@';
-  login(email:string,password:string):boolean{
-    if(email === this.validEmail && password === this.validPassword){
-      this.loggedIn=true;
+  private readonly validEmail = 'admin@gmail.com';
+  private readonly validPassword = 'Admin29@';
+  private readonly STORAGE_KEY = 'isLoggedIn';
+  login(email: string, password: string): boolean {
+    if (email === this.validEmail && password === this.validPassword) {
+      localStorage.setItem(this.STORAGE_KEY,'true');
       return true;
     }
-    this.loggedIn=false;
     return false;
   }
-  isLoggedIn():boolean{
-    return this.loggedIn;
+  isLoggedIn(): boolean {
+    return localStorage.getItem(this.STORAGE_KEY)==='true';
+  }
+  logout(){
+    localStorage.removeItem(this.STORAGE_KEY);
   }
 }
