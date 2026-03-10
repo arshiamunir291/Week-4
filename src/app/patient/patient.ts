@@ -4,7 +4,8 @@ import { Router, RouterLink } from '@angular/router';
 import { PatientService } from '../core/service/patient-service';
 import { DuplicatePatientValidator } from '../core/Validators/duplicate-patient.validator';
 import { AgeValidator } from '../core/Validators/age-validator.validator';
-import { FormError } from '../shared/form-error/form-error';
+import { FormError } from '../shared/form-error';
+
 
 
 @Component({

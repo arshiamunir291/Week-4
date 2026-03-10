@@ -2,8 +2,8 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Auth } from '../../core/service/auth';
-import { FormError } from '../../shared/form-error/form-error';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormError } from '../../shared/form-error';
 
 
 @Component({

@@ -6,59 +6,31 @@
             <form [formGroup]="patientForm" (ngSubmit)="onsubmit()">
                 <div class="mb-1">
                     <label for="fullname" class="form-label fw-bold">Full Name</label>
-                    <app-form-error 
-                        [control]="patientForm.controls['fullname']" 
-                        [messages]="validationMessage['fullname']">
-                    </app-form-error>
-                    <input type="text" id="fullname" class="form-control" formControlName="fullname" placeholder="Enter full name">
+                    <input type="text" id="fullname" class="form-control" formControlName="fullname" placeholder="Enter full name" appFormError [messages]="validationMessage.fullname">
                 </div>
                 <div class="mb-1">
                     <label for="email" class="form-label fw-bold">Email</label>
-                    <app-form-error 
-                        [control]="patientForm.controls['email']"
-                        [messages]="validationMessage['email']">
-                    </app-form-error>
-                    <input type="email" id="email" class="form-control" formControlName="email" placeholder="Enter email">
+                    <input type="email" id="email" class="form-control" formControlName="email" placeholder="Enter email" appFormError [messages]="validationMessage.email">
                 </div>
                 <div class="mb-1">
                     <label for="cnic" class="form-label fw-bold">CNIC</label>
-                    <app-form-error 
-                        [control]="patientForm.controls['cnic']"
-                        [messages]="validationMessage['cnic']">
-                    </app-form-error>
-                    <input type="text" id="cnic" class="form-control" formControlName="cnic" placeholder="Enter cnic">
+                    <input type="text" id="cnic" class="form-control" formControlName="cnic" placeholder="Enter cnic" appFormError [messages]="validationMessage.cnic">
                 </div>
                 <div class="mb-1">
                     <label for="age" class="form-label fw-bold">Age</label>
-                    <app-form-error 
-                        [control]="patientForm.controls['age']"
-                        [messages]="validationMessage['age']">
-                    </app-form-error>
-                    <input type="number" id="age" class="form-control" formControlName="age" placeholder="Enter age">
+                    <input type="number" id="age" class="form-control" formControlName="age" placeholder="Enter age" appFormError [messages]="validationMessage.age">
                 </div>
                 <div class="mb-1">
                     <label for="gender" class="form-label fw-bold">Gender</label>
-                    <app-form-error 
-                        [control]="patientForm.controls['gender']" 
-                        [messages]="validationMessage['gender']">
-                    </app-form-error>
-                    <input type="text" id="gender" class="form-control" formControlName="gender" placeholder="Enter gender">
+                    <input type="text" id="gender" class="form-control" formControlName="gender" placeholder="Enter gender" appFormError [messages]="validationMessage.gender">
                 </div>
                 <div class="mb-1">
                     <label for="phone" class="form-label fw-bold">Phone</label>
-                    <app-form-error 
-                        [control]="patientForm.controls['phone']" 
-                        [messages]="validationMessage['phone']">
-                    </app-form-error>
-                    <input type="text" id="phone" class="form-control" formControlName="phone" placeholder="Enter phone number">
+                    <input type="text" id="phone" class="form-control" formControlName="phone" placeholder="Enter phone number" appFormError [messages]="validationMessage.phone">
                 </div>
                 <div class="mb-1">
                     <label for="disease" class="form-label fw-bold">Disease</label>
-                    <app-form-error 
-                        [control]="patientForm.controls['disease']" 
-                        [messages]="validationMessage['disease']">
-                    </app-form-error>
-                    <input type="text" id="disease" class="form-control" formControlName="disease" placeholder="Enter disease">
+                    <input type="text" id="disease" class="form-control" formControlName="disease" placeholder="Enter disease" appFormError [messages]="validationMessage.disease">
                 </div>
                 <div class="mb-1 d-flex justify-content-start">
                     <button type="submit" class="btn btn-success fw-bold text-white mt-2 px-5"

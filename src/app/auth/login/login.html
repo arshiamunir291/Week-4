@@ -6,19 +6,11 @@
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="mb-3">
                     <label for="email" class="form-label fw-bold">Email</label>
-                    <input type="email" id="email" class="form-control" formControlName="email" placeholder="Enter email">
-                    <app-form-error 
-                        [control]="loginForm.controls['email']" 
-                        [messages]="validationMessage['email']">
-                    </app-form-error>
+                    <input type="email" id="email" class="form-control" formControlName="email" placeholder="Enter email" appFormError [messages]="validationMessage.email">
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label fw-bold">Password</label>
-                    <input type="password" id="password" class="form-control" formControlName="password" placeholder="Enter password">
-                    <app-form-error 
-                        [control]="loginForm.controls['password']" 
-                        [messages]="validationMessage['password']">
-                    </app-form-error>
+                    <input type="password" id="password" class="form-control" formControlName="password" placeholder="Enter password" appFormError [messages]="validationMessage.password">
                 </div>
                 @if (loginError) {
                     <div class="alert alert-danger">
